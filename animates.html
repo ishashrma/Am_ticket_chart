@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AM Tickets by Components</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    canvas {
+      max-width: 600px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>AM Tickets by Components</h2>
+  <canvas id="componentChart"></canvas>
+
+  <script>
+    const ctx = document.getElementById('componentChart').getContext('2d');
+    const componentChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [
+          'CCI Update/Renewal Process',
+          'Deprovision',
+          'New Account Setup',
+          'Dealsheet/EMG Upsize',
+          'Product Setup',
+          'Overage/Tier Upgrades',
+          'Infrastructure Change Request',
+          'Contract Mapping',
+          'Audit Request',
+          'Customer Request',
+          'New Account Setup, Product...',
+          'Other'
+        ],
+        datasets: [{
+          data: [84, 68, 18, 17, 8, 7, 4, 4, 2, 2, 1, 3],
+          backgroundColor: [
+            '#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3', '#a6d854',
+            '#ffd92f', '#e5c494', '#b3b3b3', '#1f78b4', '#33a02c',
+            '#fb9a99', '#cab2d6'
+          ],
+          borderWidth: 1,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          animateRotate: true,
+          duration: 1500
+        },
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              boxWidth: 15,
+              color: '#444',
+              font: {
+                size: 13
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.label || '';
+                let value = context.parsed;
+                return `${label}: ${value}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
